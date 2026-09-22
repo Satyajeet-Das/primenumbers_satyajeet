@@ -28,15 +28,19 @@
 # print(ans) 
 
 A = ['d1', 'd5', 'd6']    
-B = ['d2', 'd3', 'd4']
+B = ['d1', 'd3', 'd4']
+C = ['d2', 'd3', 'd5']
+D = ['d6', 'd2', 'd3']
 
-def fuse(A, B, k):
+# fuse(l1, l2, l3, ...)
+def fuse(k, *l):
     scores = {}
-    for rank, v in enumerate(A):
-        scores[v] = scores.get(v, 0) + 1/(k + rank)
+    for i in l:
+        for rank, v in enumerate(i):
+            scores[v] = scores.get(v, 0) + 1/(k + rank + 1)
     
-    for rank, v in enumerate(B):
-        scores[v] = scores.get(v, 0) + 1/(k + rank)
+    # for rank, v in enumerate(B):
+    #     scores[v] = scores.get(v, 0) + 1/(k + rank + 1)
         
     temp = []
     for key, val in scores.items():
@@ -51,4 +55,4 @@ def fuse(A, B, k):
     
     return ans
 
-print(fuse(A, B, 60))
+print(fuse(60, A, B, C, D))
